@@ -1,0 +1,52 @@
+services:
+#  mongo:
+#    image: mongo:6.0
+#    container_name: mongo
+#    restart: always
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongo_data:/data/db
+#    environment:
+#      MONGO_INITDB_DATABASE: portfolio
+#      MONGO_INITDB_ROOT_USERNAME: admin
+#      MONGO_INITDB_ROOT_PASSWORD: secretpassword
+#    networks:
+#      - app-network
+
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chroma
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/data
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/data
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - app-network
+
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    restart: always
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    depends_on:
+      - chroma
+    networks:
+      - app-network
+
+volumes:
+  chroma_data:
+
+networks:
+  app-network:
+    driver: bridge

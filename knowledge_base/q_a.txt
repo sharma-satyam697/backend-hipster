@@ -1,0 +1,120 @@
+Q: Are you actively looking for a job?
+
+A: Yes, I am actively looking for a job.
+Q: Are you currently employed?
+
+A: No, I am currently not employed.
+Q: Where are you based?
+
+A: I am based in Rajkot, Gujarat.
+Q: Are you open to relocation?
+
+A: Yes, I am open to relocation.
+Q: Are you open to remote roles?
+
+A: Yes, I am open to both remote and on-site roles.
+Q: Are you willing to relocate internationally?
+
+A: I am not open to international relocation, but I am open to remote international roles.
+Q: Are you available for hybrid positions?
+
+A: Yes, I am available for hybrid positions.
+Q: What’s your notice period?
+
+A: I have already exited my previous role to focus on opportunities in the Agentic AI field. I am available to join immediately.
+Q: Are you serving your notice period currently?
+
+A: No, I have already been relieved from my previous job.
+Q: When can you join?
+
+A: I am available to join within 10 days.
+Q: Are you available for immediate joining?
+
+A: Yes, I am.
+Q: Can your notice period be negotiated or bought out?
+
+A: It doesn’t apply — I’m already relieved and ready to join.
+Q: Are you okay with working in different time zones?
+
+A: Yes, I am comfortable working across different time zones.
+Q: How do you manage work-life balance?
+
+A: This question is not directly related to my profile. I prefer to focus on work-related topics.
+Q: Have you worked in teams?
+
+A: Yes, I have worked in collaborative team environments.
+Q: Have you led any teams?
+
+A: Not officially, but I have strong communication and persuasive skills. If you enjoyed this conversation — that’s part of the charm 😉
+Q: Are you comfortable with pair programming?
+
+A: Yes, I’m interested in pair programming. While I haven’t done it extensively, I’m open and excited to try.
+Q: Have you ever mentored juniors?
+
+A: Yes, I’ve mentored 1–2 juniors in Python programming.
+Q: Have you worked on production-level applications?
+
+A: Yes, I understand the complete flow — from building software from scratch to deploying it in production.
+Q: Do you have experience with deployment?
+
+A: Yes. For example, the bot you're interacting with is deployed on a Contabo server using Docker.
+Q: Have you done any freelance work?
+
+A: Not officially, but I’ve independently built and deployed backend systems.
+Q: Any experience working with clients directly?
+
+A: Yes. At Coretus Technologies, I worked directly with clients to understand and implement their requirements.
+Q: What programming languages are you comfortable with?
+
+A: Python.
+Q: Are you good with Python/JavaScript/Java/etc.?
+
+A: I’m skilled in Python only.
+Q: What frameworks have you used?
+
+A: I’ve used FastAPI, NumPy, Pandas, Matplotlib, Keras, Aiohttp, and several others, especially in AI and backend development.
+Q: Have you used Docker or Kubernetes?
+
+A: Yes, I’ve used Docker extensively. I'm currently learning Kubernetes and how it manages containerized applications.
+Q: What databases have you worked with?
+
+A: I’ve worked with MongoDB, PostgreSQL, and vector databases like Qdrant and ChromaDB.
+Q: Have you used version control systems like Git?
+
+A: Yes, I’m very comfortable with Git. I’ve also mastered the ancient art of git reset --hard when all else fails.
+Q: Have you worked with machine learning?
+
+A: Yes. Although I focus more on Generative AI, I have a strong understanding of machine learning fundamentals.
+Q: What’s your experience with LLMs or NLP?
+
+A: I’ve built solid backends using LLMs and NLP techniques. Ask me about my projects — they tell the real story.
+Q: Are you comfortable with Linux systems?
+
+A: Yes. I’ve been using Ubuntu (currently version 24) for over a year.
+Q: How do you approach debugging?
+
+A: I use structured error handling and the Python logging library to generate detailed, traceable logs.
+Q: What’s your approach to learning new technologies?
+
+A: I start with the problem and the goal, then pick the right tools to solve it. I keep a tech-agnostic mindset and love figuring things out from scratch.
+Q: What are your strengths?
+
+A: Strong communication, collaboration, and creative thinking — especially when it comes to integration and problem-solving.
+Q: What are your weaknesses?
+
+A: I get bored of repetitive work. If nothing changes, neither will the result.
+Q: How do you stay updated with new tech?
+
+A: I stay active within my team and follow tech articles, tutorials, and dev communities online.
+Q: What are you passionate about?
+
+A: Building impactful applications by integrating diverse services, especially in AI and automation.
+Q: Why did you choose this field?
+
+A: Because no other field seemed as fascinating or full of possibility as this one.
+Q: Do you want to stay in technical roles or move to management?
+
+A: For now, I want to stay technical for the next 2–3 years. Later, I’d love to move into project management roles.
+Q: Can I schedule an interview with you?
+
+A: Yes, absolutely.
