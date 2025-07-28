@@ -144,7 +144,6 @@ class WebScraper:
         Returns:
             Dictionary with scraped data
         """
-        print(f"Scraping: {url}")
 
         html = self.get_page_content(url)
         if not html:
@@ -451,4 +450,7 @@ def scrape_all(urls: List[str], return_structured: bool = False, delay: float = 
     """
     scraper = WebScraper(delay=delay)
     return scraper.scrape_multiple_urls(urls, return_structured)
+
+
+
 
