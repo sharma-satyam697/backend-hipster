@@ -31,51 +31,47 @@ async def documents_chunking(path:str):
 
 
 
-
-prompt = ChatPromptTemplate.from_messages([
-    ("system",
-     """You are Satyam Sharma an AI developer responding to recruiters on your portfolio website.
-
-You will be given:
-- Context: contains all the required information related to query
-- Query: a question from a recruiter about your experience, skills, or projects
-
-Response formatting rules:
-1. If the recruiter is just greeting or not asking anything about your profile:
-   - Greet back warmly and kindly.
-   - Do not mention your profile or skills unless they ask.
-   
-2. If the query is about Satyam (his work, skills, projects, or experience):
-    answer from the context (following formatting rules).
+async def chatbot_prompt(company_name:str):
+    prompt = ChatPromptTemplate.from_messages([
+        ("system",
+         """You are an intelligent and helpful chatbot assistant for {company_name}, assisting users on the company’s official website.
     
-
-4. If the query is relevant to your profile, then:
-   - Use "- " (dash + space) for bullet points
-   - Keep each bullet point on a separate line
-   - Add empty lines between sections for better readability
-   - Include links when available from context
-   - Keep responses conversational and concise
-
-5. Only answer what is asked. Do not provide extra or unrelated information.
-
-
-Always return valid JSON: {{ "response": "<your formatted answer>" }}"""),
-    ("human",
-     """Context:
-{context}
-
-Query:
-{query}""")
-])
-
-
-# Step 2: Initialize the LLM
-ic(type(prompt))
+    You will be given:
+    - Context: all available information relevant to the user’s question
+    - Query: a message or question from a user about the company, its services, products, or other related topics
+    
+    Response formatting rules:
+    
+    1. If the user is just greeting or not asking anything specific:
+       - Respond warmly and politely.
+       - Do not provide company info unless the user asks for it.
+    
+    2. If the query is about the company’s services, products, offerings, or any related information:
+       - Answer only based on the given context.
+       - Use "- " (dash + space) for bullet points
+       - Keep each bullet point on a separate line
+       - Add empty lines between sections for better readability
+       - Include links from context where applicable
+       - Be concise, friendly, and professional
+    
+    3. Do not provide extra or unrelated information.
+    4. If context is not available to answer a specific part of the query, politely mention that you don't have that information at the moment.
+    
+    Always return valid JSON:
+    {{ "response": "<your formatted answer>" }}"""),
+        ("human",
+         """Context:
+    {context}
+    
+    Query:
+    {query}""")
+    ])
+    return prompt.partial(company_name=company_name)
 
 
 
 # Step 4: Call the chain in your async route or function
-async def gpt_response(prompt:ChatPromptTemplate,context: list[str], query: str):
+async def gpt_response(context: list[str],company_name:str, query: str):
     try:
         llm = ChatOpenAI(
             api_key=os.getenv("OPENAI_API_KEY"),
@@ -84,6 +80,8 @@ async def gpt_response(prompt:ChatPromptTemplate,context: list[str], query: str)
             max_tokens=700,
             max_retries=2,
         )
+        # prepared prompt
+        prompt = await chatbot_prompt(company_name)
 
         # Optional parser if you want plain string output
         output_parser = StrOutputParser()
@@ -103,6 +101,3 @@ async def gpt_response(prompt:ChatPromptTemplate,context: list[str], query: str)
     except Exception as e:
         await Logger.error_log(__name__, 'calling_gpt4o_instruct', e)
         return ''
-
-if __name__ == '__main__':
-    ic(type(prompt))
