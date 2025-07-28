@@ -1,0 +1,11 @@
+Languages & Frameworks: Python, FastAPI, gRPC
+
+Machine Learning & AI: LLMs, RAG, Hugging Face, LSTM, RNN
+
+Databases: MongoDB, Postgres, InfluxDB, Qdrant (vector DBs)
+
+Tools & Platforms: LangChain, Docker, Git
+
+Soft skills – 1. Strong communication skills,
+              2. able to influence others through my philosophy,
+              3. Sudoku
