@@ -57,7 +57,11 @@ class ChromaDB:
         if results.get('ids')[0]:
             for i,score in enumerate(results.get('distances')[0]):
                 if score <= threshold_score:
-                    chunks.append(results.get('documents')[0][i])
+                    result = {
+                        'context' : results.get('documents')[0][i],
+                        'metadata' : results.get('metadatas')[0][i]
+                    }
+                    chunks.append(result)
 
 
         return chunks
