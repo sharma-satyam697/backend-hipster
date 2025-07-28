@@ -1,6 +1,7 @@
 import json
 import os
 from json import JSONDecodeError
+from typing import List
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -60,7 +61,8 @@ Response formatting guidelines:
 4. If context does not contain the answer to any part of the query, politely mention that you do not have that specific information at the moment.
 
 Always return a valid JSON response in the following format:
-{{ "response": "<your formatted answer>" }}"""),
+{{{{ "response": "<your formatted answer>" }}}}
+"""),
         ("human",
          """Context:
 {context}
@@ -77,8 +79,22 @@ Query:
 
 
 # Step 4: Call the chain in your async route or function
-async def gpt_response(context: list[str],company_name:str, query: str):
+async def gpt_response(context: List[dict], company_name: str, query: str):
     try:
+        # Step 1: Aggregate context and metadata
+        context_str = ""
+        metadata_urls = []
+
+        for item in context:
+            context_text = item.get("context", "")
+            metadata_url = item.get("metadata", {}).get("url", "")
+            context_str += context_text.strip() + "\n\n"
+            if metadata_url:
+                metadata_urls.append(metadata_url)
+
+        metadata_str = "\n".join(f"- {url}" for url in metadata_urls)
+
+        # Step 2: Initialize LLM
         llm = ChatOpenAI(
             api_key=os.getenv("OPENAI_API_KEY"),
             model="gpt-4.1-nano",
@@ -86,24 +102,31 @@ async def gpt_response(context: list[str],company_name:str, query: str):
             max_tokens=700,
             max_retries=2,
         )
-        # prepared prompt
-        prompt = await chatbot_prompt(company_name)
 
-        # Optional parser if you want plain string output
+        # Step 3: Prepare prompt
+        prompt = await chatbot_prompt(company_name)
         output_parser = StrOutputParser()
-        # Step 3: Compose the chain
         chain = prompt | llm | output_parser
 
-        result = await chain.ainvoke({"context": context, "query": query})
+        # Step 4: Call the chain
+        result = await chain.ainvoke({
+            "context": context_str,
+            "metadata": metadata_str,
+            "query": query
+        })
+
+        # Step 5: Parse JSON response from the model
         try:
             response = json.loads(result)
         except JSONDecodeError as je:
-            await Logger.error_log(__name__,'gpt_response',je)
-            return {'response' : 'Sorry! Can you please try again later'}
+            await Logger.error_log(__name__, 'gpt_response', je)
+            return {'response': 'Sorry! Can you please try again later'}
         except Exception as e:
-            await Logger.error_log(__name__,'gpt_response',e)
-            return {'response' : 'Sorry! Can you please try again later'}
+            await Logger.error_log(__name__, 'gpt_response', e)
+            return {'response': 'Sorry! Can you please try again later'}
+
         return response
+
     except Exception as e:
         await Logger.error_log(__name__, 'calling_gpt4o_instruct', e)
-        return ''
+        return {'response': 'Something went wrong. Please try again later.'}
